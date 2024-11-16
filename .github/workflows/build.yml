@@ -1,0 +1,35 @@
+name: Build and Export
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gettext zip wget apt-transport-https software-properties-common
+        wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+        sudo dpkg -i packages-microsoft-prod.deb
+        sudo apt-get update
+        sudo apt-get install -y powershell
+
+    - name: Run the build script
+      env:
+        # https://github.com/git-for-windows/git/archive/refs/tags/v2.47.0.windows.2.tar.gz
+        GIT_VERSION: "2.47.0.windows.2" # 替换为你需要的 Git 版本
+      run: |
+        chmod +x ./build.sh
+        ./build.sh ${{ env.GIT_VERSION }}
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.ZIP_FILE }}
+        path: ${{ env.ZIP_FILE }}
