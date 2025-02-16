@@ -1,10 +1,17 @@
 # Git for Windows 汉化
 
-## 2024-11-17 新增通过 Actions 编译
-- 可选：修改 build.yml 中的 `GIT_VERSION` 变量，指定需要汉化的 Git 版本。
+## Change log
+2024-11-17 新增通过 Actions 编译<br>
+......
+
+### 在线编译
+- Fork 本仓库
+- Settings -> Secrets and variables -> Actions 添加一个变量 `GIT_VERSION` 并指定版本号，如：`2.48.1.windows.1`。
 - 手动执行 Actions，然后下载生成的压缩包，把里面的东西（mingw64）解压到 Git 安装目录即可。
 
-## 本地编译
+<hr>
+
+### 本地编译
 
 以下步骤是原文作者写的步骤 [@toyobayashi](https://github.com/toyobayashi/git-zh)
 
