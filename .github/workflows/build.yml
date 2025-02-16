@@ -23,7 +23,8 @@ jobs:
     - name: Run the build script
       env:
         # https://github.com/git-for-windows/git/archive/refs/tags/v2.47.0.windows.2.tar.gz
-        GIT_VERSION: "2.47.0.windows.2" # 替换为你需要的 Git 版本
+        # Settings -> Secrets and variables -> Actions 添加一个变量 GIT_VERSION 并指定版本号，如：2.48.1.windows.1
+        GIT_VERSION: ${{ secrets.GIT_VERSION }}
       run: |
         chmod +x ./build.sh
         ./build.sh ${{ env.GIT_VERSION }}
